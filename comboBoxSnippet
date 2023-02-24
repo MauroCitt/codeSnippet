@@ -1,0 +1,134 @@
+using System;
+
+namespace cajerodivisas
+{
+    public partial class Form1 : Form
+    {
+
+        char[] simbolos = new char[] { '€', '$', '$'};
+
+        double[,] array = new double[3, 3] {
+
+                {1, 1.07, 205.53 },
+                {0.93, 1, 192.02},
+                {0.0049, 0.0052, 1},
+
+                };
+        public Form1()
+        {
+            InitializeComponent();
+            button1.Click += new EventHandler(teclado_Click);
+            button2.Click += new EventHandler(teclado_Click);
+            button3.Click += new EventHandler(teclado_Click);
+            button4.Click += new EventHandler(teclado_Click);
+            button5.Click += new EventHandler(teclado_Click);
+            button6.Click += new EventHandler(teclado_Click);
+            button7.Click += new EventHandler(teclado_Click);
+            button8.Click += new EventHandler(teclado_Click);
+            button9.Click += new EventHandler(teclado_Click);
+            button10.Click += new EventHandler(teclado_Click);
+
+            comboBox1.Items.Add("Euro");
+            comboBox1.Items.Add("Dólar");
+            comboBox1.Items.Add("Peso argentino");
+
+            comboBox2.Items.Add("Euro");
+            comboBox2.Items.Add("Dólar");
+            comboBox2.Items.Add("Peso argentino");
+
+           
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void teclado_Click(object sender, EventArgs e) { 
+
+            Button button= (Button)sender;
+            string number = button.Text;
+            textBox1.Text += number;
+
+        
+        
+        }
+
+   
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+            if (comboBox1.SelectedIndex < 0 || comboBox2.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione una divisa", "Error",
+                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            
+
+            else 
+            {
+                int fila = comboBox1.SelectedIndex;
+                int col = comboBox2.SelectedIndex;
+
+                if (fila == col)
+                {
+                    MessageBox.Show("Ingrese divisas diferentes.", "Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                else 
+                {
+
+                    try
+                    {
+
+                        double num = Convert.ToDouble(textBox1.Text);
+                        double res = num * array[fila, col];
+                        res = Math.Round(res, 2);
+                        string resu = res.ToString();
+
+
+                        textBox1.Text = resu + simbolos[col];
+
+
+
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("No se puede convertir.", "Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                }
+
+
+
+            }
+            
+            
+                
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != null) { 
+                textBox1.Clear();
+
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
